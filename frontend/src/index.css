@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 /* Custom styles can be added here */
 @theme {
   /* Font */
@@ -12,7 +11,7 @@
   --color-retro-surface: #2a2a2a; /* slightly lighter surface */
 
   --color-retro-primary: #f3701e; /* orange */
-  --color-retro-secondary: #4b607f; /* blue */
+  --color-retro-secondary: #349aed; /* blue */
   --color-retro-accent: #e8d8c9; /* beige */
 
   --color-retro-border: #3a3a3a; /* border color */
@@ -30,46 +29,12 @@ body {
   background-position: -19px -19px;
 }
 
-/* Brutalist shadow utility */
-.brutalist-shadow {
-  box-shadow: 4px 4px 0px var(--color-retro-primary);
+.soft-shadow {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
   transition:
-    transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.brutalist-shadow:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px var(--color-retro-primary);
-}
-
-.brutalist-shadow:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px var(--color-retro-primary);
-}
-
-.brutalist-shadow:focus-visible {
-  outline: none;
-  box-shadow:
-    0 0 0 2px var(--color-retro-surface),
-    0 0 0 4px var(--color-retro-primary),
-    4px 4px 0px var(--color-retro-primary);
-}
-
-.brutalist-shadow:hover:focus-visible {
-  box-shadow:
-    0 0 0 2px var(--color-retro-surface),
-    0 0 0 4px var(--color-retro-primary),
-    6px 6px 0px var(--color-retro-primary);
-}
-
-.brutalist-shadow:active:focus-visible {
-  box-shadow:
-    0 0 0 2px var(--color-retro-surface),
-    0 0 0 4px var(--color-retro-primary),
-    2px 2px 0px var(--color-retro-primary);
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 @keyframes slideIn {
@@ -95,94 +60,24 @@ body {
     transform: none;
   }
 
-  .brutalist-shadow {
+  .soft-shadow {
     transition: none;
   }
 }
 
 * {
   scrollbar-width: none;
-  scrollbar-color: var(--color-retro-accent) transparent;
 }
 
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Start with a transparent thumb */
-  border-radius: 0px; /* This creates the sharp corners */
-  border: none; /* Ensures it fills the width completely */
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(var(--color-retro-bg) / 0.6);
-}
-
-/* Optional: Active state (clicking the bar) */
-*::-webkit-scrollbar-thumb:active {
-  background-color: hsl(var(--muted-foreground));
-}
-
-.retro-toolbar {
-  /* Match the Button component vibe: beige slab, black text, chunky border */
-  --basePageBg: var(--color-retro-accent);
-  --baseBgSubtle: var(--color-retro-accent);
-  --baseBg: var(--color-retro-accent);
-  --baseBgActive: color-mix(in srgb, var(--color-retro-accent) 85%, white 15%);
-  --baseBorder: var(--color-retro-bg);
-  --baseBorderHover: var(--color-retro-bg);
-  --baseText: var(--color-retro-bg);
-  --baseTextContrast: var(--color-retro-bg);
-
-  background: var(--color-retro-accent) !important;
-  border: 2px solid var(--color-retro-bg) !important;
-  border-radius: 0 !important;
-  color: var(--color-retro-bg) !important;
-  box-shadow: 4px 4px 0 var(--color-retro-primary);
-}
-
-.retro-toolbar [class*="_toolbarToggleItem_"],
-.retro-toolbar [class*="_toolbarButton_"],
-.retro-toolbar button {
-  background: var(--color-retro-accent) !important;
-  color: var(--color-retro-bg) !important;
-  border: 2px solid var(--color-retro-bg) !important;
-  border-radius: 0 !important;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.15s ease,
-    box-shadow 0.2s ease;
-}
-
-.retro-toolbar [class*="_toolbarToggleItem_"]:hover,
-.retro-toolbar [class*="_toolbarButton_"]:hover,
-.retro-toolbar button:hover {
-  background: var(--color-retro-primary) !important;
-  color: var(--color-retro-bg) !important;
-  box-shadow: 0 0 0 1px var(--color-retro-primary);
-}
-
-.retro-toolbar [class*="_toolbarToggleItem_"][data-state="on"],
-.retro-toolbar [class*="_toolbarButton_"][data-state="on"],
-.retro-toolbar button[data-state="on"] {
-  background: var(--color-retro-primary) !important;
-  color: var(--color-retro-bg) !important;
-}
-
-.retro-toolbar [class*="_toolbarToggleItem_"]:active,
-.retro-toolbar [class*="_toolbarButton_"]:active,
-.retro-toolbar button:active {
-  transform: translate(1px, 1px);
-}
-
-.retro-toolbar div[role="separator"] {
-  border-left-color: var(--color-retro-bg) !important;
-  border-right-color: var(--color-retro-bg) !important;
-}
-
-.retro-toolbar svg {
-  color: currentColor !important;
-  fill: currentColor !important;
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("grain.gif");
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 9999;
 }

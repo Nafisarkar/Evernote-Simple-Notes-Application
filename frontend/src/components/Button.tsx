@@ -10,7 +10,7 @@ const Button = ({
   return (
     <button
       aria-label={ariaLabel}
-      className="bg-retro-accent text-retro-bg p-2 flex items-center justify-center gap-2 rounded-none w-full border-2 border-retro-bg cursor-pointer brutalist-shadow transition-transform motion-reduce:transition-none"
+      className="bg-retro-accent text-retro-bg p-2 flex items-center justify-center gap-2 rounded-none w-full border-2 border-retro-bg cursor-pointer soft-shadow transition-colors motion-reduce:transition-none"
       onClick={handler}
     >
       {children}

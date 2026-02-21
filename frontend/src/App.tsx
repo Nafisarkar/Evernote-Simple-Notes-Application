@@ -7,17 +7,9 @@ import Notfoundpage from "./pages/Notfoundpage";
 
 function App() {
   return (
-    <div className="bg-retro-surface text-retro-accent w-screen h-screen min-w-2xs min-h-2xs overflow-hidden relative">
-      {/* Decorative background elements */}
-      <div
-        className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-0"
-        aria-hidden="true"
-      >
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-retro-primary/5 blur-[120px] rounded-full mix-blend-screen"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-retro-secondary/5 blur-[120px] rounded-full mix-blend-screen"></div>
-      </div>
-
-      <div className="flex flex-col w-full h-full p-6  mx-auto relative ">
+    <div className="relative w-screen h-screen bg-retro-surface text-retro-accent overflow-hidden ">
+      <div className="grain-overlay pointer-events-none fixed inset-0 z-50" />
+      <div className="flex flex-col w-full h-full p-4 mx-auto">
         <Routes>
           <Route path="/" element={<Heropage />} />
           <Route path="/home" element={<Homepage />} />

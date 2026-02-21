@@ -3,7 +3,7 @@ import Viewport from "../components/Viewport";
 
 function Homepage() {
   return (
-    <div className="flex flex-row h-full w-full gap-8">
+    <div className="flex flex-row h-full w-full gap-4">
       <Sidebar />
       <Viewport />
     </div>

@@ -11,7 +11,7 @@ function Sidebar() {
   return (
     <aside className="w-64 shrink-0 border-2 border-retro-border bg-retro-bg rounded-none flex flex-col p-4 relative ">
       {/* Sidebar head content */}
-      <div className="flex flex-row gap-4 mb-2">
+      <div className="flex flex-row gap-4 ">
         <Button ariaLabel="User Profile">
           <UserIcon size={22} weight="bold" aria-hidden="true" />
         </Button>
@@ -24,7 +24,7 @@ function Sidebar() {
       <div className="border-t-2 border-retro-border my-4 border-dashed" />
 
       {/* Sidebar body content */}
-      <div className="flex flex-col gap-4 overflow-y-auto flex-1 pr-2 pb-4">
+      <div className="flex flex-col gap-4 overflow-y-auto flex-1  pb-4">
         {/* Example sidebar items */}
         {[...Array(15)].map((_, i) => (
           <div
