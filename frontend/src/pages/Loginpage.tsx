@@ -1,5 +1,12 @@
+import { Link } from "react-router";
+
 function Loginpage() {
-  return <div>Loginpage</div>;
+  return (
+    <div>
+      - Loginpage
+      <Link to="/home"> home</Link>
+    </div>
+  );
 }
 
 export default Loginpage;
