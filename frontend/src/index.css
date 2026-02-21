@@ -1,1 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
+
+/* Custom styles can be added here */
+@theme {
+  /* Font */
+  --font-retro: "Bebas Neue", cursive;
+  --font-retro-body: "Inter", sans-serif;
+
+  /* Base colors */
+  --color-retro-bg: #0f0f10;
+  --color-retro-surface: #1a1a1c;
+
+  --color-retro-primary: #f3701e; /* orange */
+  --color-retro-secondary: #4b607f; /* blue */
+  --color-retro-accent: #e8d8c9; /* beige */
+
+  --color-retro-border: #2f2f33;
+}
