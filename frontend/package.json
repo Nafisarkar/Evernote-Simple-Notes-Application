@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mdxeditor/editor": "^3.52.4",
     "@phosphor-icons/react": "^2.1.10",
+    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.0",
     "axios": "^1.13.5",
     "jotai": "^2.18.0",
