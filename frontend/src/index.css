@@ -80,5 +80,5 @@ body {
   opacity: 0.04;
   mix-blend-mode: overlay;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 30;
 }

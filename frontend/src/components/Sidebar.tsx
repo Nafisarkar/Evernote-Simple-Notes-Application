@@ -2,6 +2,7 @@ import { PlusIcon } from "@phosphor-icons/react";
 import Button from "./Button";
 import { UserIcon } from "@phosphor-icons/react";
 import { Sidebaritem } from "./Sidebaritem";
+import Dialog from "./Dialog";
 
 function Sidebar() {
   const handleButtonClick = () => {
@@ -11,13 +12,28 @@ function Sidebar() {
   return (
     <aside className="w-64 shrink-0 border-2 border-retro-border bg-retro-bg rounded-none flex flex-col p-4 relative ">
       {/* Sidebar head content */}
-      <div className="flex flex-row gap-4 ">
-        <Button ariaLabel="User Profile">
-          <UserIcon size={22} weight="bold" aria-hidden="true" />
+      <div className="flex gap-4 ">
+        <Button ariaLabel="User Profile" className="w-full bg-retro-accent">
+          <UserIcon weight="bold" aria-hidden="true" />
         </Button>
-        <Button handler={handleButtonClick} ariaLabel="Create New Note">
-          <PlusIcon size={22} weight="bold" aria-hidden="true" />
-        </Button>
+        <Dialog
+          trigger={
+            <Button
+              handler={handleButtonClick}
+              ariaLabel="Add Note"
+              className="w-full bg-retro-accent"
+            >
+              <PlusIcon weight="bold" aria-hidden="true" />
+            </Button>
+          }
+        >
+          <div className="">
+            <input
+              type="text"
+              className="outline-none focus:outline-none border-2 border-retro-border rounded-none w-full bg-retro-bg text-retro-fg p-2"
+            />
+          </div>
+        </Dialog>
       </div>
 
       {/* Devider */}
