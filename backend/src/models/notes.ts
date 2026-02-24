@@ -12,7 +12,6 @@ const noteSchema = new Schema(
     },
     description: {
       type: String,
-      require: true,
     },
     date: {
       type: Date,

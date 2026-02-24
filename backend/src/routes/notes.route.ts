@@ -12,7 +12,7 @@ const noteRouter = express.Router();
 noteRouter.get("/all", getAllNotes);
 noteRouter.get("/:id", getANote);
 noteRouter.post("/add", addNote);
-noteRouter.post("/:id", updateNote);
+noteRouter.patch("/:id", updateNote);
 noteRouter.delete("/:id", deleteNote);
 
 export default noteRouter;

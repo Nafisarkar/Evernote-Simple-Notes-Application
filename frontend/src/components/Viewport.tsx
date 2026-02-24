@@ -4,18 +4,47 @@ import {
   markdownShortcutPlugin,
   MDXEditor,
   quotePlugin,
+  type MDXEditorMethods,
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
+import { useNotes } from "../contexts/notescontext";
+import { useEffect, useRef } from "react";
+import { SpinnerIcon } from "@phosphor-icons/react";
 
 function Viewport() {
+  const { loading, notes, selectedNote } = useNotes();
+  const editorRef = useRef<MDXEditorMethods>(null);
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.setMarkdown(selectedNote.description);
+      console.log("Updated editor content with selected note description");
+    }
+  }, [selectedNote]);
+
   return (
     <main
       className="flex-1 border-2 border-retro-border bg-retro-bg rounded-none overflow-y-auto p-4  relative  animate-slide-in"
       style={{ animationDelay: "0.2s" }}
       aria-label="Note Editor"
     >
+      {!loading && notes.length === 0 ? (
+        <div className="flex items-center justify-center h-full">
+          <p className="text-retro-fg text-lg">
+            No notes found. Click the + button to create your first note!
+          </p>
+        </div>
+      ) : null}
+
+      {loading ? (
+        <div className="flex items-center justify-center h-full">
+          <p className="text-retro-fg text-lg animate-spin ">
+            <SpinnerIcon size={32} />
+          </p>
+        </div>
+      ) : null}
       <MDXEditor
-        markdown="hello world"
+        ref={editorRef}
+        markdown={""}
         plugins={[
           headingsPlugin(),
           listsPlugin(),

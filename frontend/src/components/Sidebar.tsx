@@ -1,10 +1,12 @@
 import { PlusIcon } from "@phosphor-icons/react";
 import Button from "./Button";
-import { UserIcon } from "@phosphor-icons/react";
 import { Sidebaritem } from "./Sidebaritem";
 import Dialog from "./Dialog";
+import { useNotes } from "../contexts/notescontext";
 
 function Sidebar() {
+  const { notes } = useNotes();
+
   const handleButtonClick = () => {
     console.log("Button clicked!");
   };
@@ -12,16 +14,28 @@ function Sidebar() {
   return (
     <aside className="w-64 shrink-0 border-2 border-retro-border bg-retro-bg rounded-none flex flex-col p-4 relative ">
       {/* Sidebar head content */}
-      <div className="flex gap-4 ">
-        <Button ariaLabel="User Profile" className="w-full bg-retro-accent">
-          <UserIcon weight="bold" aria-hidden="true" />
-        </Button>
+      <div className="flex gap-4 items-center">
+        {notes.length > 0 ? (
+          <div className="flex flex-row items-center gap-2">
+            <h1 className="font-retro text-xl tracking-wide text-retro-fg">
+              {notes.length}
+            </h1>
+            <h1 className="font-retro text-xl tracking-wide text-retro-fg">
+              {notes.length === 1 ? "Note" : "Notes"}
+            </h1>
+          </div>
+        ) : (
+          <h1 className="font-retro text-xl tracking-wide text-retro-fg">
+            No Notes Yet
+          </h1>
+        )}
+
         <Dialog
           trigger={
             <Button
               handler={handleButtonClick}
               ariaLabel="Add Note"
-              className="w-full bg-retro-accent"
+              className="w-full bg-retro-accent "
             >
               <PlusIcon weight="bold" aria-hidden="true" />
             </Button>
@@ -42,13 +56,13 @@ function Sidebar() {
       {/* Sidebar body content */}
       <div className="flex flex-col gap-4 overflow-y-auto flex-1  pb-4">
         {/* Example sidebar items */}
-        {[...Array(15)].map((_, i) => (
+        {notes.map((note, i) => (
           <div
             key={i}
             className="animate-slide-in"
             style={{ animationDelay: `${i * 0.05}s` }}
           >
-            <Sidebaritem title={`Note ${i + 1}`} createdAt="2024-06-01" />
+            <Sidebaritem note={note} />
           </div>
         ))}
       </div>
