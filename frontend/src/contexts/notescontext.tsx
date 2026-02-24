@@ -6,6 +6,8 @@ type NoteContextType = {
   notes: Note[];
   loading: boolean;
   selectedNote: Note;
+  createNote: (title: string) => void;
+  updateNote: (id: string, description: string) => void;
   noteSelectionHandlerForViewPort: (id: string) => void;
   setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
 };
@@ -24,19 +26,20 @@ export const NotesProvider = ({ children }: { children: React.ReactNode }) => {
   });
   const [loading, setLoading] = useState<boolean>(false);
 
+  const fetchNotes = async () => {
+    setLoading(true);
+    try {
+      const res = await api.get("/all");
+      setNotes(res.data.notes);
+      console.log("Fetched notes:", res.data.notes);
+    } catch (error) {
+      console.error("Error fetching notes:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchNotes = async () => {
-      setLoading(true);
-      try {
-        const res = await api.get("/all");
-        setNotes(res.data.notes);
-        console.log("Fetched notes:", res.data.notes);
-      } catch (error) {
-        console.error("Error fetching notes:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchNotes();
   }, [selectedNote._id]);
 
@@ -49,12 +52,52 @@ export const NotesProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const createNote = async (title: string) => {
+    try {
+      const res = await api.post("/add", {
+        title,
+        description: "",
+      });
+      fetchNotes();
+      console.log("Created note:", res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const updateNote = async (id: string, description: string) => {
+    try {
+      const res = await api.patch(`/${id}`, { description });
+
+      // Update local state without refetching
+      setNotes((prev) =>
+        prev.map((note) =>
+          note._id === id
+            ? { ...note, description, updatedAt: new Date().toISOString() }
+            : note,
+        ),
+      );
+
+      setSelectedNote((prev) =>
+        prev._id === id
+          ? { ...prev, description, updatedAt: new Date().toISOString() }
+          : prev,
+      );
+
+      console.log("Updated note:", res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <noteContext.Provider
       value={{
         notes,
         loading,
         selectedNote,
+        createNote,
+        updateNote,
         setNotes,
         noteSelectionHandlerForViewPort,
       }}

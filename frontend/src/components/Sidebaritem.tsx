@@ -15,13 +15,18 @@ export const Sidebaritem = ({ note }: SidebarItemProps) => {
       onClick={() => noteSelectionHandlerForViewPort(note._id)}
     >
       <h2 className="font-retro text-2xl tracking-wide group-hover:text-retro-accent transition-colors motion-reduce:transition-none">
-        {note.title}
+        {note.title.length > 15
+          ? note.title.substring(0, 15) + "..."
+          : note.title}
       </h2>
       <p className="text-xs font-mono opacity-80 uppercase mt-1">
         {new Date(note.updatedAt).toLocaleDateString(undefined, {
           year: "numeric",
           month: "short",
           day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
         })}
       </p>
     </button>

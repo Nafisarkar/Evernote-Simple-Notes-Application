@@ -37,7 +37,10 @@ const Dialog = ({ actionFunction, trigger, children }: Props) => {
 
             <div className="flex flex-row items-start justify-end">
               <Button
-                handler={actionFunction}
+                handler={() => {
+                  actionFunction?.();
+                  closeDialog();
+                }}
                 size="icon"
                 className=" bg-green-500 w-full"
               >
